@@ -10,7 +10,7 @@ int main()
 {
     cout << "Welcome to Inpatient Checkout Simulator!" << endl;
 
+
     // end
     return 0;
 }
-
