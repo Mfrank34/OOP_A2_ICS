@@ -4,11 +4,23 @@
 #include "Headers/Pharmacy.h"
 #include "Headers/Surgery.h"
 
+void starGen(int amount){
+    for (int i = 0; i < amount; i++)
+    {
+        cout << "*";
+    }
+    cout << endl;
+}
+
 using namespace std;
 // Main
 int main()
 {
-    cout << "Welcome to Inpatient Checkout Simulator!" << endl;
+    starGen(20);
+    cout << "Inpatient Checkout Menu" << endl;
+    starGen(20);
+
+    
 
 
     // end
