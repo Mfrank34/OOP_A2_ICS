@@ -9,23 +9,22 @@ using namespace std;
 class Surgery
 {
 private:
-    vector<string> medications = {"None", "Antibiotic", "Anti-inflamatory", "Anti-nausea", "Inhalant", "Pain Relief"};
-    vector<int> medicationCost = {0,20,17,38,66,35};
+    // storing information about the class
+    vector<string> surgeryPerformed = {"None", "Cataract surgery", "Debridement", "Low back pain surgery", "Tonsillectomy"};
+    vector<int> prices = {0, 1500, 180, 900, 2100};
 
-    // handeling
-    int amount;
-    int selection;
-
+    // user data
+    int surgery;
 public:
-    Surgery(/* args */);
+    Surgery();
 
-    void readout();
+    void readout(); // display surgerys
 
-    void Selection();
+    void setSurgery(int input); // user select screen
 
-    void amountSelect();
+    int surgeryCost(); // return cost of surgerys
 
-    int medsCost();
+    int getTreatmentSize();
 
     ~Surgery();
 };

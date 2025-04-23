@@ -1,34 +1,45 @@
 #include "Pharmacy.h"
 #include <iostream>
 
+#include <vector>
+#include <string>
+#include <limits>
+
+using namespace std;
+
 Pharmacy::Pharmacy()
 {
 }
 
 void Pharmacy::readout()
 {
-    cout << "Which type of surgery has been performed?" << endl;
-    for (int i; i < surgeryPerformed.size(); i++)
+    for (int i; i < medications.size(); i++)
     {
-        cout << i << "." << surgeryPerformed[i] << "-" << prices[i] << endl;
-    }
+        cout << i << "." << medications[i] << "-" << medicationCost[i] << endl;
+    };
 }
 
-void Pharmacy::selection()
+void Pharmacy::Selection(int input)
 {
-    // need error checking mike!
-    int userinput;
-    cout << "Choose a type of Surgery (0-4): ";
-    cin >> userinput;
-    // user input
-    userinput = userSelect; 
+    selection = input;
 }
 
-int Pharmacy:: surgeryCost()
+void Pharmacy::amountSelect(int input)
 {
-    return prices[userSelect];
+    amount = input;
+}
+
+int Pharmacy::medsCost()
+{
+    return medicationCost[selection] * amount;
+}
+
+int Pharmacy::getMedicationSize()
+{
+    return medications.size();
 }
 
 Pharmacy::~Pharmacy()
 {
+
 }

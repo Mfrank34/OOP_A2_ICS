@@ -1,6 +1,8 @@
 #ifndef PATIENT_ACCOUNT_H
 #define PATIENT_ACCOUNT_H
 
+#include <string>
+
 class PatientAccount
 {
 private:

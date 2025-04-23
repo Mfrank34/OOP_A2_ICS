@@ -1,46 +1,35 @@
 #include "Surgery.h"
 #include <iostream>
 
-#include <vector>
-#include <string>
-
-using namespace std;
-
 Surgery::Surgery()
 {
+    
 }
+
 
 void Surgery::readout()
 {
-    for (int i; i < medications.size(); i++)
+    cout << "Which type of surgery has been performed?" << endl;
+    for (int i; i < surgeryPerformed.size(); i++)
     {
-        cout << i << "." << medications[i] << "-" << medicationCost[i] << endl;
-    };
+        cout << i << "." << surgeryPerformed[i] << "-" << prices[i] << endl;
+    }
 }
 
-void Surgery::Selection()
+void Surgery::setSurgery(int input)
 {
-    // need error checking mike!
-    int userinput;
-    cout << "Choose a type of Surgery (0-4): ";
-    cin >> userinput;
-    // user input
-    userinput = selection;
+    surgery = input;
 }
 
-void Surgery::amountSelect()
+int Surgery:: surgeryCost()
 {
-    // need error checking mike!
-    int userinput;
-    cout << "Choose a type of Surgery (0-4): ";
-    cin >> userinput;
-    // user input
-    userinput = amount;
+    return prices[surgery];
 }
 
-int Surgery::medsCost()
+
+int Surgery::getTreatmentSize()
 {
-    return medicationCost[selection] * amount;
+    return surgeryPerformed.size();
 }
 
 Surgery::~Surgery()
