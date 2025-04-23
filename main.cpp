@@ -20,9 +20,6 @@ int main()
     cout << "Inpatient Checkout Menu" << endl;
     starGen(20);
 
-    
-
-
     // end
     return 0;
 }
