@@ -9,12 +9,14 @@ using namespace std;
 class Tables
 {
 protected:
-    vector<string> item = {};
-    vector<float> cost = {};
+    // information for tables
+    vector<pair<string,float>> tableData = {};
 public:
     Tables();
 
     void createTable();
+
+    int getTableDataSize();
 
     ~Tables();
 };

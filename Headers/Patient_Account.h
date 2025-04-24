@@ -3,30 +3,33 @@
 
 #include <string>
 
+using namespace std;
+
 class PatientAccount
 {
 private:
-    int total_stay;
-    int room_rate;
-    int extra_cost; 
-    
+    string name;
+    int stay;
+    float rate;
+    float extraCost;
 public:
     PatientAccount();
 
-    // setting total stay.
-    void set_total_stay(int days);
-    // setting room rate.
-    void set_room_rate(int rate);
-    // display different items.
-    int return_total_stay();
+    void setName(string input);
 
-    int return_room_rate();
+    void setStay(int input);
 
-    void add_extra_cost(int extra);
+    void setRate(float input);
 
-    int return_extra_cost();
+    void setExtraCost(float input);
 
-    int return_total_cost();
+    string getName();
+
+    int getStay();
+
+    float getRate();
+
+    float getExtraCost();
 
     ~PatientAccount();
 

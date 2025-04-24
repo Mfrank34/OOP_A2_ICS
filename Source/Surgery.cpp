@@ -1,35 +1,42 @@
 #include "Surgery.h"
-#include <iostream>
+#include "Tables.h"
+#include <vector>
+#include <map>
 
+using namespace std;
 Surgery::Surgery()
 {
-    
+    this-> tableData = {
+        {"None", 0},
+        {"Cataract surgery", 1500},
+        {"Debridement", 180},
+        {"Low back pain surgery", 900},
+        {"Tonsillectomy", 2100}
+    };
 }
 
-void Surgery::readout()
+void Surgery::setSurgery(int index)
 {
-    for (int i; i < surgeryPerformed.size(); i++)
-    {
-        cout << i << "." << surgeryPerformed[i] << "-" << prices[i] << endl;
-    }
+    pair<string, float> select = tableData[index];
+    surgeryData.push_back(select);
 }
 
-void Surgery::setSurgery(int input)
+vector<pair<string,float>> Surgery::getData()
 {
-    surgery = input;
+    return surgeryData;
 }
 
-int Surgery:: surgeryCost()
+int Surgery:: getCost()
 {
-    return prices[surgery];
+    return 0;
 }
 
-
-int Surgery::getTreatmentSize()
+string Surgery:: getName()
 {
-    return surgeryPerformed.size();
+    return "hi";
 }
 
 Surgery::~Surgery()
 {
+
 }

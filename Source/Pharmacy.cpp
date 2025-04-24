@@ -1,22 +1,26 @@
 #include "Pharmacy.h"
 #include "Tables.h"
-#include <iostream>
-
-#include <vector>
 #include <string>
-#include <limits>
+#include <vector>
 
 using namespace std;
 
 Pharmacy::Pharmacy()
 {
-    this->item = {"None", "Antibiotic", "Anti-inflamatory", "Anti-nausea", "Inhalant", "Pain Relief"};
-    this->cost = {0.00,20.00,17.00,38.00,66.00,35.00};
+    this-> tableData = {
+        {"None", 0.00},
+        {"Antibiotic", 20.00},
+        {"Anti-inflamatory", 17.00},
+        {"Anti-nausea", 38.00},
+        {"Inhalant", 66.00},
+        {"Pain Relief", 35.00}
+    };
 }
 
-void Pharmacy::setMedication(int input)
+void Pharmacy::setMedication(int index)
 {
-    medication = input;
+    pair<string, float> select = tableData[index];
+    pharmacyData.push_back(select);
 }
 
 void Pharmacy::setAmount(int input)
@@ -24,14 +28,14 @@ void Pharmacy::setAmount(int input)
     amount = input;
 }
 
-int Pharmacy::medsCost()
+vector<pair<string,float>> Pharmacy::getData()
 {
-    return cost[medication] * amount;
+    return pharmacyData;
 }
 
-int Pharmacy::getMedicationSize()
+int Pharmacy::getAmount()
 {
-    return item.size();
+    return amount;
 }
 
 Pharmacy::~Pharmacy()

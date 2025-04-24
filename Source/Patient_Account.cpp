@@ -1,48 +1,21 @@
 #include "Patient_Account.h"
-#include <iostream>
 
-PatientAccount::PatientAccount()
-{
+PatientAccount::PatientAccount() {}
 
-}
+void PatientAccount::setName(string input) { name = input; }
 
-void PatientAccount::set_total_stay(int days)
-{
-    total_stay = days;
-}
+void PatientAccount::setStay(int input) {stay = input; }
 
-void PatientAccount :: set_room_rate(int rate)
-{
-    room_rate = rate;
-}
+void PatientAccount::setRate(float input) {rate = input; }
 
-int PatientAccount:: return_room_rate()
-{
-    return room_rate;
-}
+void PatientAccount::setExtraCost(float input) {extraCost = input; }
 
-int PatientAccount:: return_total_stay()
-{
-    return total_stay;
-}
+string PatientAccount::getName() {return name; }
 
-void PatientAccount:: add_extra_cost(int extra)
-{
-    extra_cost += extra;
-}
+int PatientAccount::getStay() {return stay; }
 
-int PatientAccount:: return_extra_cost()
-{
-    return extra_cost; 
-}
+float PatientAccount::getRate() {return rate; }
 
-int PatientAccount:: return_total_cost()
-{
-    return (room_rate * total_stay) + extra_cost;
-}
+float PatientAccount::getExtraCost() {return extraCost; }
 
-PatientAccount::~PatientAccount()
-{
-
-}
-
+PatientAccount::~PatientAccount() {}

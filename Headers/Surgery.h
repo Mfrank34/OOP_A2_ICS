@@ -1,30 +1,28 @@
 #ifndef SURGERY_H
 #define SURGERY_H
 
+#include"Tables.h"
 #include <string>
 #include <vector>
 
 using namespace std;
 
-class Surgery
+class Surgery : public Tables
 {
 private:
-    // storing information about the class
-    vector<string> surgeryPerformed = {"None", "Cataract surgery", "Debridement", "Low back pain surgery", "Tonsillectomy"};
-    vector<int> prices = {0, 1500, 180, 900, 2100};
-
     // user data
-    int surgery;
+    vector<pair <string, float> > surgeryData = {};
+
 public:
     Surgery();
 
-    void readout(); // display surgerys
-
     void setSurgery(int input); // user select screen
 
-    int surgeryCost(); // return cost of surgerys
+    vector<pair<string,float>> getData();
 
-    int getTreatmentSize();
+    int getCost(); // return cost of surgerys
+
+    string getName();
 
     ~Surgery();
 };

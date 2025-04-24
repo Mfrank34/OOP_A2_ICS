@@ -7,15 +7,13 @@
 #include "Headers/Surgery.h"
 
 void charGen(string length, char placeholder = '*')
+// gets the length of string, and placeholder to make line same length as inputed string
 {
-    for (int i = 0; i < length.size(); i++)
-    {
-        cout << placeholder;
-    }
-    cout << endl;
+    cout << string(length.size(), placeholder) << endl;
 }
 
 int errorHandingRange(int range)
+// an errorHandler that deals with range items starting from 0 to range.
 {
     int input;
     while (!(cin >> input) || input < 0 || input > range)
@@ -37,6 +35,7 @@ int errorHandingRange(int range)
 
 int errorHanding()
 {
+    // number handler
     int input;
     while (!(cin >> input))
     {
@@ -48,6 +47,14 @@ int errorHanding()
     return input;
 }
 
+void dataRead(vector<pair<string, float>> data)
+{
+    for (const auto & items : data)
+    {
+        cout << items.first << " | " << items.second << endl;
+    }
+}
+
 void title()
 {
     string title = "Inpatient Checkout Menu";
@@ -56,28 +63,10 @@ void title()
     charGen(title);
 }
 
-using namespace std;
-// Main
-int main()
+void surgeryScreen(Surgery surgery)
 {
-    // start
-    title();
-
-    PatientAccount patient;
-
-    // days amount
-    string dayMessage = "How many days was the patient in the hospital? ";
-    cout << dayMessage;
-    int days;
-    days = errorHanding();
-    patient.set_total_stay(days);
-    charGen(dayMessage, '-');
-
-    // surgery performed
-    Surgery surgery;
-
     string surgeryMessage = "Which type of surgery has been performed?";
-    surgery.readout();
+    surgery.createTable();
     charGen(surgeryMessage, '-');
 
     // surgery input
@@ -86,10 +75,17 @@ int main()
 
     // selecting surgery...
     int surgerySelect;
-    surgerySelect = errorHandingRange(surgery.getTreatmentSize()); // yes i could saved it verable...
+    surgerySelect = errorHandingRange(surgery.getTableDataSize());
+
+    // make it handel multiple selects
     surgery.setSurgery(surgerySelect);
 
-    // pharmacy setup
+    // edit remove before sub
+    dataRead(surgery.getData());
+}
+
+void pharmacyScreen()
+{
     Pharmacy pharmacy;
 
     string pharmacyMessage = "which follow-up medication has been given?";
@@ -98,32 +94,64 @@ int main()
     cout << pharmacyMessage << endl;
 
     // pharmacy readout
-    pharmacy.readout();
+    pharmacy.createTable();
     charGen(pharmacyMessage, '-');
 
     // pharmacy select
     string pharmacyInputMessage = "Choose a type of mediation (0-5): ";
-    cout << pharmacyInputMessage << endl;
+    cout << pharmacyInputMessage;
 
     int pharmacySelect;
-    pharmacySelect = errorHandingRange(pharmacy.getMedicationSize()); // yes i could saved it verable...
+    pharmacySelect = errorHandingRange(pharmacy.getTableDataSize()); // yes i could saved it verable...
     pharmacy.setMedication(pharmacySelect);
     charGen(pharmacyInputMessage, '-');
 
+    // edit remove before sub
+    dataRead(pharmacy.getData());
+
     // pharmacy amount
     string pharmacyAmountInputMessage = "Select amount of medications: ";
-    cout << pharmacyAmountInputMessage << endl;
+    cout << pharmacyAmountInputMessage;
 
     int pharmacyAmount;
     pharmacyAmount = errorHanding();
     pharmacy.setAmount(pharmacyAmount);
     charGen(pharmacyAmountInputMessage, '-');
+}
 
+using namespace std;
+
+int main()
+{
+    // start
+    title();
+
+    // PatientAccount patient;
+
+    // // name input
+    // string patientNameMessage = "Enter Patients Name: ";
+    // cout << patientNameMessage;
+    // // input
+    // string patientName;
+    // cin >> patientName;
+
+    // // days amount
+    // string dayMessage = "How many days was the patient in the hospital? ";
+    // cout << dayMessage;
+    // int days;
+    // days = errorHanding();
+    // patient.setStay(days);
+    // charGen(dayMessage, '-');
+
+    // add surgery section
+    Surgery surgery;
+    surgeryScreen(surgery);
+    surgeryScreen(surgery);
+
+    // pharmacy setup
+    // pharmacyScreen();
 
     // calulations
-    
-
-
 
     // end
     return 0;

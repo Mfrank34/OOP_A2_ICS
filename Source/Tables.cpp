@@ -1,16 +1,24 @@
 #include "Tables.h"
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
-Tables::Tables(){};
+Tables::Tables() {};
 
-Tables::~Tables(){}
+void Tables::createTable() {
+    string costStr = " | Cost £";
+    for (size_t i = 0; i < tableData.size(); ++i) {
+        cout << left << setw(2) << i << ". "
+             << setw(24) << tableData[i].first
+             << right << setw(10) << costStr << tableData[i].second
+             << endl;
+    }
+};
 
-void Tables::createTable()
+int Tables::getTableDataSize()
 {
-    for (int index; index < item.size(); index++)
-    {
-        cout << index << ". " << item[index] << "| Cost: " << cost[index] << endl;
-    } 
-}
+    return tableData.size();
+};
+
+Tables::~Tables() {};

@@ -10,19 +10,20 @@ using namespace std;
 class Pharmacy : public Tables
 {
 private:
+    // mediaction data
+    vector <pair <string, float> > pharmacyData = {};
+    // amount information
     int amount;
-    int medication;
-
 public:
     Pharmacy();
 
-    void setMedication(int input);
+    void setMedication(int index);
 
+    vector<pair<string,float>> getData();
+    
     void setAmount(int input);
 
-    int medsCost();
-
-    int getMedicationSize();
+    int getAmount();
 
     ~Pharmacy();
 
