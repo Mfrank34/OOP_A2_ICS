@@ -4,6 +4,7 @@
 #include <map>
 
 using namespace std;
+
 Surgery::Surgery()
 {
     this-> tableData = {

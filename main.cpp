@@ -6,6 +6,8 @@
 #include "Headers/Pharmacy.h"
 #include "Headers/Surgery.h"
 
+using namespace std;
+
 void charGen(string length, char placeholder = '*')
 // gets the length of string, and placeholder to make line same length as inputed string
 {
@@ -63,7 +65,7 @@ void title()
     charGen(title);
 }
 
-void surgeryScreen(Surgery surgery)
+void surgeryScreen(Surgery& surgery)
 {
     string surgeryMessage = "Which type of surgery has been performed?";
     surgery.createTable();
@@ -84,10 +86,8 @@ void surgeryScreen(Surgery surgery)
     dataRead(surgery.getData());
 }
 
-void pharmacyScreen()
+void pharmacyScreen(Pharmacy& pharmacy)
 {
-    Pharmacy pharmacy;
-
     string pharmacyMessage = "which follow-up medication has been given?";
     // formating
     charGen(pharmacyMessage, '-');
@@ -119,8 +119,6 @@ void pharmacyScreen()
     charGen(pharmacyAmountInputMessage, '-');
 }
 
-using namespace std;
-
 int main()
 {
     // start
@@ -145,9 +143,13 @@ int main()
 
     // add surgery section
     Surgery surgery;
+
     surgeryScreen(surgery);
     surgeryScreen(surgery);
 
+    Pharmacy pharmacy;
+    pharmacyScreen(pharmacy);
+    pharmacyScreen(pharmacy);
     // pharmacy setup
     // pharmacyScreen();
 
