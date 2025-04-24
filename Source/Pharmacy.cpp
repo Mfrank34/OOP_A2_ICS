@@ -1,4 +1,5 @@
 #include "Pharmacy.h"
+#include "Tables.h"
 #include <iostream>
 
 #include <vector>
@@ -9,34 +10,28 @@ using namespace std;
 
 Pharmacy::Pharmacy()
 {
+    this->item = {"None", "Antibiotic", "Anti-inflamatory", "Anti-nausea", "Inhalant", "Pain Relief"};
+    this->cost = {0.00,20.00,17.00,38.00,66.00,35.00};
 }
 
-void Pharmacy::readout()
+void Pharmacy::setMedication(int input)
 {
-    for (int i; i < medications.size(); i++)
-    {
-        cout << i << "." << medications[i] << "-" << medicationCost[i] << endl;
-    };
+    medication = input;
 }
 
-void Pharmacy::Selection(int input)
-{
-    selection = input;
-}
-
-void Pharmacy::amountSelect(int input)
+void Pharmacy::setAmount(int input)
 {
     amount = input;
 }
 
 int Pharmacy::medsCost()
 {
-    return medicationCost[selection] * amount;
+    return cost[medication] * amount;
 }
 
 int Pharmacy::getMedicationSize()
 {
-    return medications.size();
+    return item.size();
 }
 
 Pharmacy::~Pharmacy()

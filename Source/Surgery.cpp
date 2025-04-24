@@ -6,10 +6,8 @@ Surgery::Surgery()
     
 }
 
-
 void Surgery::readout()
 {
-    cout << "Which type of surgery has been performed?" << endl;
     for (int i; i < surgeryPerformed.size(); i++)
     {
         cout << i << "." << surgeryPerformed[i] << "-" << prices[i] << endl;

@@ -1,11 +1,13 @@
 #include <iostream>
 #include <limits>
+
 // classes
 #include "Headers/Patient_Account.h"
 #include "Headers/Pharmacy.h"
 #include "Headers/Surgery.h"
 
-void charGen(string length, char placeholder = '*'){
+void charGen(string length, char placeholder = '*')
+{
     for (int i = 0; i < length.size(); i++)
     {
         cout << placeholder;
@@ -54,16 +56,15 @@ void title()
     charGen(title);
 }
 
-
 using namespace std;
 // Main
 int main()
 {
-    // start 
+    // start
     title();
 
     PatientAccount patient;
-    
+
     // days amount
     string dayMessage = "How many days was the patient in the hospital? ";
     cout << dayMessage;
@@ -74,29 +75,56 @@ int main()
 
     // surgery performed
     Surgery surgery;
-    
+
     string surgeryMessage = "Which type of surgery has been performed?";
     surgery.readout();
     charGen(surgeryMessage, '-');
 
     // surgery input
     string SurgeryInputMessage = "Choose a type of Surgery (0-4): ";
-    cout << SurgeryInputMessage; 
+    cout << SurgeryInputMessage;
 
     // selecting surgery...
     int surgerySelect;
     surgerySelect = errorHandingRange(surgery.getTreatmentSize()); // yes i could saved it verable...
-    surgery.setSurgery(surgerySelect);    
-    charGen(SurgeryInputMessage, '-');
+    surgery.setSurgery(surgerySelect);
 
     // pharmacy setup
     Pharmacy pharmacy;
 
+    string pharmacyMessage = "which follow-up medication has been given?";
+    // formating
+    charGen(pharmacyMessage, '-');
+    cout << pharmacyMessage << endl;
+
+    // pharmacy readout
+    pharmacy.readout();
+    charGen(pharmacyMessage, '-');
+
+    // pharmacy select
+    string pharmacyInputMessage = "Choose a type of mediation (0-5): ";
+    cout << pharmacyInputMessage << endl;
+
+    int pharmacySelect;
+    pharmacySelect = errorHandingRange(pharmacy.getMedicationSize()); // yes i could saved it verable...
+    pharmacy.setMedication(pharmacySelect);
+    charGen(pharmacyInputMessage, '-');
+
+    // pharmacy amount
+    string pharmacyAmountInputMessage = "Select amount of medications: ";
+    cout << pharmacyAmountInputMessage << endl;
+
+    int pharmacyAmount;
+    pharmacyAmount = errorHanding();
+    pharmacy.setAmount(pharmacyAmount);
+    charGen(pharmacyAmountInputMessage, '-');
+
+
+    // calulations
     
 
 
-    
-    
+
     // end
     return 0;
 }
