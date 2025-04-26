@@ -7,37 +7,24 @@ using namespace std;
 
 Surgery::Surgery()
 {
-    this-> tableData = {
+    this->tableData = {
         {"None", 0},
         {"Cataract surgery", 1500},
         {"Debridement", 180},
         {"Low back pain surgery", 900},
-        {"Tonsillectomy", 2100}
-    };
+        {"Tonsillectomy", 2100}};
 }
 
-void Surgery::setSurgery(int index)
+void Surgery::setTreatement(int index)
 {
     pair<string, float> select = tableData[index];
-    surgeryData.push_back(select);
+    treatementData.push_back(select);
 }
 
-vector<pair<string,float>> Surgery::getData()
-{
-    return surgeryData;
-}
+vector<pair<string, float>> Surgery::getData() { return treatementData; }
 
-int Surgery:: getCost()
-{
-    return 0;
-}
+void Surgery::setAmount(int input) { amount = input; }
 
-string Surgery:: getName()
-{
-    return "hi";
-}
+int Surgery::getAmount() { return amount; }
 
-Surgery::~Surgery()
-{
-
-}
+Surgery::~Surgery() {}

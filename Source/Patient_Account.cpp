@@ -2,20 +2,27 @@
 
 PatientAccount::PatientAccount() {}
 
-void PatientAccount::setName(string input) { name = input; }
+PatientAccount::PatientAccount(string name, float rate, int stay)
+{
+    this->name = name;
+    this->stay = stay;
+    this->rate = rate;
+};
 
-void PatientAccount::setStay(int input) {stay = input; }
+void PatientAccount::setName(string input) { name = input; };
 
-void PatientAccount::setRate(float input) {rate = input; }
+void PatientAccount::setStay(int input) { stay = input; };
 
-void PatientAccount::setExtraCost(float input) {extraCost = input; }
+void PatientAccount::setRate(float input) { rate = input; };
 
-string PatientAccount::getName() {return name; }
+void PatientAccount::setExtraCost(float input) { extraCost = input; };
 
-int PatientAccount::getStay() {return stay; }
+string PatientAccount::getName() { return name; };
 
-float PatientAccount::getRate() {return rate; }
+int PatientAccount::getStay() { return stay; };
 
-float PatientAccount::getExtraCost() {return extraCost; }
+float PatientAccount::getRate() { return rate; };
 
-PatientAccount::~PatientAccount() {}
+float PatientAccount::getExtraCost() { return extraCost; };
+
+PatientAccount::~PatientAccount() {};

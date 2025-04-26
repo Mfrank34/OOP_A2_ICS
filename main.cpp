@@ -14,46 +14,65 @@ void charGen(string length, char placeholder = '*')
     cout << string(length.size(), placeholder) << endl;
 }
 
-int errorHandingRange(int range)
-// an errorHandler that deals with range items starting from 0 to range.
-{
-    int input;
-    while (!(cin >> input) || input < 0 || input > range)
-    {
-        if (0 > input && input < range)
-        {
-            cout << "Enter number between 0 - " << range << ": ";
-        }
-        else
-        {
-            cout << "Invalid input. Enter numbers: ";
-        }
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-    // user input
-    return input;
-}
-
-int errorHanding()
-{
-    // number handler
-    int input;
-    while (!(cin >> input))
-    {
-        cout << "Invalid input. Enter numbers: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-    // user input
-    return input;
-}
-
 void dataRead(vector<pair<string, float>> data)
+// debugging tool
 {
-    for (const auto & items : data)
+    for (const auto &items : data)
     {
         cout << items.first << " | " << items.second << endl;
+    }
+}
+
+int errorHandleDigits(string mode, int range = 0)
+{
+    if (mode == "range") // error handle numbers within range
+    {
+        int input;
+        while (!(cin >> input) || input < 0 || input > (range - 1))
+        {
+            cout << "Enter a number between 0 and " << range << ": ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        return input;
+    }
+    else if (mode == "number") // error handel numbers
+    {
+        int input;
+        while (!(cin >> input))
+        {
+            cout << "Invalid input. Enter a number: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        return input;
+    }
+    else
+    {
+        cout << "Unknown mode.\n";
+        return -1; // or throw an error
+    }
+}
+
+char errorHandleLetters()
+{
+    char input;
+    bool letters = true;
+    while (true)
+    {
+        cin >> input;
+        input = tolower(input);
+
+        if (input == 'y' || input == 'n')
+            letters = false;
+
+        else
+        {
+            cout << "Invalid input. Enter 'y' or 'n': ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        return input;
     }
 }
 
@@ -65,58 +84,93 @@ void title()
     charGen(title);
 }
 
-void surgeryScreen(Surgery& surgery)
+string patientName()
 {
-    string surgeryMessage = "Which type of surgery has been performed?";
-    surgery.createTable();
-    charGen(surgeryMessage, '-');
+    bool getName = true;
+    string patientNameMessage = "Enter Patients Name: ";
+    string patientName;
+    while (getName)
+    {
+        // message
+        cout << patientNameMessage;
+        // input
+        cin >> patientName;
 
-    // surgery input
-    string SurgeryInputMessage = "Choose a type of Surgery (0-4): ";
-    cout << SurgeryInputMessage;
+        // checking name
+        cout << "The patient's name is " << patientName << ". Is this correct? Please answer with 'y' or 'n': ";
+        char answer = errorHandleLetters();
 
-    // selecting surgery...
-    int surgerySelect;
-    surgerySelect = errorHandingRange(surgery.getTableDataSize());
+        if (answer == 'y')
+        {
+            // loop breaker
+            getName = false;
+        }
+    }
+    charGen(patientNameMessage, '-');
+    return patientName;
+};
 
-    // make it handel multiple selects
-    surgery.setSurgery(surgerySelect);
-
-    // edit remove before sub
-    dataRead(surgery.getData());
-}
-
-void pharmacyScreen(Pharmacy& pharmacy)
+int daySelect()
 {
-    string pharmacyMessage = "which follow-up medication has been given?";
-    // formating
-    charGen(pharmacyMessage, '-');
-    cout << pharmacyMessage << endl;
+    // verable setup
+    bool daySelect = true;
+    int days;
+    string dayMessage = "How many days was the patient in the hospital? ";
+    while (daySelect)
+    {
+        // message
+        cout << dayMessage;
+        // input
+        days = errorHandleDigits("number");
+        cout << "Days in hospital: " << days << ". Is this correct? ('y' or 'n'): ";
+        // check
+        char answer = errorHandleLetters();
+        // break
+        if (answer == 'y')
+        {
+            daySelect = false;
+        }
+    }
+    charGen(dayMessage, '-');
+    return days;
+};
 
-    // pharmacy readout
-    pharmacy.createTable();
-    charGen(pharmacyMessage, '-');
+void classScreen(auto &GivenClass, vector<string> sentence)
+{
+    int loopScreen = true;
+    while (loopScreen)
+    {
+        // create table
+        cout << sentence[0] << endl;
+        GivenClass.createTable();
+        charGen(sentence[0], '-');
 
-    // pharmacy select
-    string pharmacyInputMessage = "Choose a type of mediation (0-5): ";
-    cout << pharmacyInputMessage;
+        // Input section
+        cout << sentence[1];
+        int select = errorHandleDigits("range", GivenClass.getTableDataSize());
+        charGen(sentence[1], '-');
+        // selecting multiple
+        cout << sentence[2];
+        int amount = errorHandleDigits("number");
+        GivenClass.setAmount(amount);
+        charGen(sentence[2], '-');
 
-    int pharmacySelect;
-    pharmacySelect = errorHandingRange(pharmacy.getTableDataSize()); // yes i could saved it verable...
-    pharmacy.setMedication(pharmacySelect);
-    charGen(pharmacyInputMessage, '-');
+        // Storing multiple treatments
+        for (int i = 0; i < GivenClass.getAmount(); i++)
+        {
+            GivenClass.setTreatement(select);
+        }
+        // exit message
 
-    // edit remove before sub
-    dataRead(pharmacy.getData());
-
-    // pharmacy amount
-    string pharmacyAmountInputMessage = "Select amount of medications: ";
-    cout << pharmacyAmountInputMessage;
-
-    int pharmacyAmount;
-    pharmacyAmount = errorHanding();
-    pharmacy.setAmount(pharmacyAmount);
-    charGen(pharmacyAmountInputMessage, '-');
+        cout << sentence[3];
+        char answer = errorHandleLetters();
+        charGen(sentence[3], '-');
+        // break
+        if (answer == 'n')
+        {
+            loopScreen = false;
+        }
+    }
 }
 
 int main()
@@ -124,35 +178,39 @@ int main()
     // start
     title();
 
-    // PatientAccount patient;
-
-    // // name input
-    // string patientNameMessage = "Enter Patients Name: ";
-    // cout << patientNameMessage;
-    // // input
-    // string patientName;
-    // cin >> patientName;
-
-    // // days amount
-    // string dayMessage = "How many days was the patient in the hospital? ";
-    // cout << dayMessage;
-    // int days;
-    // days = errorHanding();
-    // patient.setStay(days);
-    // charGen(dayMessage, '-');
+    // patient name
+    string name = patientName();
+    // patient days
+    int days = daySelect();
 
     // add surgery section
     Surgery surgery;
+    // sentences
+    vector<string> surgeryMessages = {
+        "Which type of surgery was performed? ",             // 0
+        "Choose a type of surgery (0 - 4): ",                // 1
+        "Select amount of surgeries: ",                      // 2
+        "Do you want to add more surgerie? ('y' or 'n'): "}; // 3
 
-    surgeryScreen(surgery);
-    surgeryScreen(surgery);
+    classScreen(surgery, surgeryMessages);
+    // debug data read
+    //dataRead(surgery.getData());
 
-    Pharmacy pharmacy;
-    pharmacyScreen(pharmacy);
-    pharmacyScreen(pharmacy);
     // pharmacy setup
-    // pharmacyScreen();
+    Pharmacy pharmacy;
+    vector<string> medicationMessages = {
+        "Which follow-up medication was given? ",
+        "Choose a type of medication (0 - 5): ",
+        "Select the amount of medications: ",
+        "Would you like to choose more medications? ('y' or 'n'): "};
 
+    classScreen(pharmacy, medicationMessages);
+    // debug data read
+    //dataRead(pharmacy.getData());
+
+    // time for overloading i am i right?
+    PatientAccount patient(name, 200, days);
+    
     // calulations
 
     // end

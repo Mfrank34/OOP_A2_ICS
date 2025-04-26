@@ -7,38 +7,25 @@ using namespace std;
 
 Pharmacy::Pharmacy()
 {
-    this-> tableData = {
+    this->tableData = {
         {"None", 0.00},
         {"Antibiotic", 20.00},
         {"Anti-inflamatory", 17.00},
         {"Anti-nausea", 38.00},
         {"Inhalant", 66.00},
-        {"Pain Relief", 35.00}
-    };
-}
+        {"Pain Relief", 35.00}};
+};
 
-void Pharmacy::setMedication(int index)
+void Pharmacy::setTreatement(int index)
 {
     pair<string, float> select = tableData[index];
-    pharmacyData.push_back(select);
-}
+    treatementData.push_back(select);
+};
 
-void Pharmacy::setAmount(int input)
-{
-    amount = input;
-}
+vector<pair<string, float>> Pharmacy::getData() { return treatementData; };
 
-vector<pair<string,float>> Pharmacy::getData()
-{
-    return pharmacyData;
-}
+void Pharmacy::setAmount(int input) { amount = input; };
 
-int Pharmacy::getAmount()
-{
-    return amount;
-}
+int Pharmacy::getAmount() { return amount; };
 
-Pharmacy::~Pharmacy()
-{
-
-}
+Pharmacy::~Pharmacy() {};

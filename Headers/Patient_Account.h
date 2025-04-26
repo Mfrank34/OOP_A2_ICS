@@ -14,6 +14,8 @@ private:
     float extraCost;
 public:
     PatientAccount();
+    
+    PatientAccount(string name, float rate, int stay);
 
     void setName(string input);
 
