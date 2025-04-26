@@ -55,4 +55,4 @@ The system is divided into three main classes:
 2. Navigate to the project folder.
 3. Compile the project:
    ```bash
-   g++ -o HospitalBilling main.cpp PatientAccount.cpp Surgery.cpp Pharmacy.cpp
+   g++ -o HospitalBilling main.cpp PatientAccount.cpp Surgery.cpp Pharmacy.cpp Tables.cpp FileManager.cpp
