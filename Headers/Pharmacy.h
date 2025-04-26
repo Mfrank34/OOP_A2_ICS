@@ -10,18 +10,20 @@ using namespace std;
 class Pharmacy : public Tables
 {
 private:
-    vector <pair <string, float> > treatementData = {};
+    vector <tuple<string, int, float>> treatementData = {};
     int amount;
 public:
     Pharmacy();
 
     void setTreatement(int index);
 
-    vector<pair<string,float>> getData();
+    vector<tuple<string, int, float>> getData();
     
     void setAmount(int input);
 
     int getAmount();
+
+    float getTreatementCost();
 
     ~Pharmacy();
 };

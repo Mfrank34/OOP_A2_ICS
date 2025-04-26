@@ -10,7 +10,8 @@ class Tables
 {
 protected:
     // information for tables
-    vector<pair<string,float>> tableData = {};
+    vector<pair<string, float>> tableData = {};
+
 public:
     Tables();
 

@@ -9,13 +9,11 @@ PatientAccount::PatientAccount(string name, float rate, int stay)
     this->rate = rate;
 };
 
-void PatientAccount::setName(string input) { name = input; };
+void PatientAccount::setName(string input) { name = input; }; // set input for name
 
-void PatientAccount::setStay(int input) { stay = input; };
+void PatientAccount::setStay(int input) { stay = input; }; // set input for stay
 
-void PatientAccount::setRate(float input) { rate = input; };
-
-void PatientAccount::setExtraCost(float input) { extraCost = input; };
+void PatientAccount::setRate(float input) { rate = input; }; // really do i need to explain this???
 
 string PatientAccount::getName() { return name; };
 
@@ -23,6 +21,6 @@ int PatientAccount::getStay() { return stay; };
 
 float PatientAccount::getRate() { return rate; };
 
-float PatientAccount::getExtraCost() { return extraCost; };
+float PatientAccount::getStayAmount() { return (rate * stay); }; // rate is float, stay is interger times them for stay cost
 
 PatientAccount::~PatientAccount() {};

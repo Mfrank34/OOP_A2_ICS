@@ -5,6 +5,11 @@
         "ostream": "cpp",
         "*.tcc": "cpp",
         "compare": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "tuple": "cpp",
+        "iosfwd": "cpp",
+        "text_encoding": "cpp",
+        "typeinfo": "cpp",
+        "iomanip": "cpp"
     }
 }

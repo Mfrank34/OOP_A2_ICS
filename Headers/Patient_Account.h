@@ -11,10 +11,9 @@ private:
     string name;
     int stay;
     float rate;
-    float extraCost;
 public:
     PatientAccount();
-    
+
     PatientAccount(string name, float rate, int stay);
 
     void setName(string input);
@@ -23,15 +22,13 @@ public:
 
     void setRate(float input);
 
-    void setExtraCost(float input);
-
     string getName();
 
     int getStay();
 
     float getRate();
 
-    float getExtraCost();
+    float getStayAmount();
 
     ~PatientAccount();
 
