@@ -10,10 +10,10 @@
 
 using namespace std;
 
-void charGen(string length, char placeholder = '*')
+void charGen(int length = 56, char placeholder = '-')
 // gets the length of string, and placeholder to make line same length as inputed string
 {
-    cout << string(length.size(), placeholder) << endl;
+    cout << string(length, placeholder) << endl;
 }
 
 void dataRead(vector<pair<string, float>> data)
@@ -32,9 +32,9 @@ int errorHandleDigits(string mode = "number", int range = 0) // mode type | rang
         int input;
         while (!(cin >> input) || input < 0 || input > (range - 1)) // take in input and matches between range
         {
-            cout << "Enter a number between 0 and " << range << ": "; // error message that dynamic wow so cool
-            cin.clear();                                              // clear console line
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');      // clear console line
+            cout << "Enter a number between 0 and " << (range - 1) << ": "; // error message that dynamic wow so cool
+            cin.clear();                                                    // clear console line
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');            // clear console line
         }
         return input;
     }
@@ -70,16 +70,16 @@ char errorHandleLetters()
             cin.clear();                                         // clears console lone
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // removed all letter / number / spiece char
         }
-        return input;
     }
+    return input;
 }
 
 void title()
 {
     string title = "Inpatient Checkout Menu";
-    charGen(title);
-    cout << title << endl;
-    charGen(title);
+    charGen(56, '*');
+    cout << string(15, ' ') << title << string(15, ' ') << endl;
+    charGen(56, '*');
 }
 
 string patientName()
@@ -89,16 +89,18 @@ string patientName()
     string patientName;                                  // collection
     while (getName)
     {
-        cout << patientNameMessage;                                                                              // message readout
-        cin >> patientName;                                                                                      // collection
-        cout << "The patient's name is " << patientName << ". Is this correct? Please answer with 'y' or 'n': "; // checking input
-        char answer = errorHandleLetters();                                                                      // checking user input and waiting for y or no
-        if (answer == 'y')
+        cout << patientNameMessage; // message readout
+        cin >> patientName;         // collection
+        cout << "The patient's name is " << patientName << endl
+             << "Is this correct? Please answer with 'y' or 'n': "; // checking input
+        char answer;                                                // checking user input and waiting for y or no
+        if (!(answer = errorHandleLetters()) || answer == 'y')
         {
             getName = false; // breaks loop
         }
     }
-    charGen(patientNameMessage, '-');
+    charGen(56, '-');
+
     return patientName;
 };
 
@@ -112,14 +114,16 @@ int daySelect()
     {
         cout << dayMessage;
         days = errorHandleDigits("number"); // collection of number
-        cout << "Days in hospital: " << days << ". Is this correct? ('y' or 'n'): ";
-        char answer = errorHandleLetters(); // should return y or n depending
-        if (answer == 'y')
+        cout << "Days in hospital: " << days << endl
+             << "Is this correct? ('y' or 'n'): ";
+
+        char answer; // should return y or n depending
+        if (!(answer = errorHandleLetters()) || answer == 'y')
         {
             daySelect = false; // break loop if yes
         }
     }
-    charGen(dayMessage, '-');
+    charGen(56, '-');
     return days; // returns day
 };
 
@@ -131,29 +135,28 @@ void classScreen(auto &GivenClass, vector<string> sentence) // used class that g
         // create table
         cout << sentence[0] << endl;
         GivenClass.createTable(); // table creator
-        charGen(sentence[0], '-');
+        charGen(56, '-');
 
         // Input section
         cout << sentence[1];
         int select = errorHandleDigits("range", GivenClass.getTableDataSize());
-        charGen(sentence[1], '-');
+        charGen(56, '-');
         // selecting multiple
         cout << sentence[2];
         int amount = errorHandleDigits("number");
-        charGen(sentence[2], '-');
+        charGen(56, '-');
 
         GivenClass.setAmount(amount);     // set together
         GivenClass.setTreatement(select); // adds muliple items to treatement data
 
         // exit message
         cout << sentence[3];
-        char answer = errorHandleLetters();
-        charGen(sentence[3], '-');
-        // break
-        if (answer == 'n')
+        char answer;
+        if (!(answer = errorHandleLetters()) || answer == 'n')
         {
             loopScreen = false;
         }
+        charGen(56, '-');
     }
 }
 
@@ -183,10 +186,10 @@ int main()
         // pharmacy setup
         Pharmacy pharmacy;
         vector<string> medicationMessages = {
-            "Which follow-up medication was given? ",                     // 0
-            "Choose a type of medication (0 - 5): ",                      // 1
-            "Select the amount of medications: ",                         // 2
-            "Would you like to choose more medications? ('y' or 'n'): "}; // 3
+            "Which follow-up medication was given? ",   // 0
+            "Choose a type of medication (0 - 5): ",    // 1
+            "Select the amount of medications: ",       // 2
+            "Choose more medications? ('y' or 'n'): "}; // 3
 
         classScreen(pharmacy, medicationMessages);
         // debug data read
@@ -207,16 +210,15 @@ int main()
         // create a read of of the bill
 
         FileManager bill;
-        bill.createTop(patient.getName());                                 // creates top of bill
+        bill.createTop(patient.getName(), patient.getStay());              // creates top of bill
         bill.createTable(surgery.getData());                               // create table 1
         bill.createTable(pharmacy.getData());                              // create table 2
         bill.createBottom(stayCost, surgeryCost, pharmacyCost, totalCost); // create end
         bill.writeFile();                                                  // reads out to bill file
 
         cout << "Create another Bill ('y' or 'n'): ";
-        char answer = errorHandleLetters();
-
-        if (answer == 'n')
+        char answer;
+        if (!(answer = errorHandleLetters()) || answer == 'n')
         {
             cout << "Thanks for using the inpatient Checkout Simulator!" << endl;
             programe = false;

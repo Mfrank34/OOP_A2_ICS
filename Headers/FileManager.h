@@ -21,7 +21,7 @@ public:
 
     void createTable(vector<tuple<string, int, float>> data);
 
-    void createTop(string name);
+    void createTop(string name, int days);
 
     void createBottom(float StayCost, float sCost, float pCost, float totalCost);
 

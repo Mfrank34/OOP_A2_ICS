@@ -11,15 +11,18 @@ using namespace std;
 
 FileManager::FileManager() {}
 
-void FileManager::createTop(string name)
+void FileManager::createTop(string name, int days)
 {
     this->name = name;
 
-    fileData << string(15, '=') << "Inpatient Checkout Receipt" << string(15, '=')
-             << endl
+    fileData << string(56, '*') << endl
+             << string(15, ' ') << "Inpatient Checkout Receipt" << string(15, ' ') << endl
+             << string(56, '*') << endl
              << endl;
+
     // Label and value with some padding
-    fileData << left << setw(18) << "Patient's Name:" << name << endl
+    fileData << left << setw(16) << "Patient's Name:" << name << endl;
+    fileData << left << setw(12) << "Days Spent:" << days << endl
              << endl;
 }
 
