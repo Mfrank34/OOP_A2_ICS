@@ -19,7 +19,7 @@ void charGen(int length = 56, char placeholder = '-')
 void dataRead(vector<pair<string, float>> data)
 // debugging tool
 {
-    for (const auto &items : data) // for reading custom data vector for instance vector<pair <string, float>> i really wanted to use index, maps dont let you
+    for (const auto &items : data) // for reading custom data vector for instance vector<tuple <string, int  ,float>> i really wanted to use index, maps dont let you
     {
         cout << items.first << " | " << items.second << endl; // custom readout format for debugging
     }
